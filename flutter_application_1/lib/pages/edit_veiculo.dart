@@ -11,15 +11,17 @@ class EditVeiculoPage extends StatefulWidget {
 class _EditVeiculoPageState extends State<EditVeiculoPage> {
   TextEditingController nomeController = TextEditingController();
   TextEditingController precoController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     final Map arguments = ModalRoute.of(context)!.settings.arguments as Map;
+
     nomeController.text = arguments['nome'];
     precoController.text = arguments['preco'];
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('edit veiculo'),
+        title: const Text('Edit Veiculo'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(15.0),
@@ -39,15 +41,14 @@ class _EditVeiculoPageState extends State<EditVeiculoPage> {
               ),
             ),
             const SizedBox(height: 20),
-            ElevatedButton(onPressed: ()async {
-           
-              await atualizaVeiculo(arguments['uid'], nomeController.text, precoController.text).then((value){
-                Navigator.pop(context);
-              });
-              
-              }, 
-          
-              child: const Text('Atualizar'))
+            ElevatedButton(
+              onPressed: () async {
+                  await atualizaVeiculo(arguments['uid'],nomeController.text, precoController.text).then((value) {
+               Navigator.pop(context);
+                });
+              },
+              child: const Text('Atualizar'),
+            )
           ],
         ),
       ),

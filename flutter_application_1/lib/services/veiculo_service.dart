@@ -1,19 +1,24 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_application_1/models/veiculo.dart';
+
 
 FirebaseFirestore db = FirebaseFirestore.instance;
 
-Future<List<Veiculo>>getVeiculo() async{
-  List<Veiculo> veiculos = [];
+Future<List>getVeiculo() async{
+  List veiculos = [];
   CollectionReference collectionReferenceVeiculo = db.collection('veiculo');
 
   QuerySnapshot queryVeiculo = await collectionReferenceVeiculo.get();
   for (var doc in queryVeiculo.docs){
-    Veiculo veiculo = Veiculo.fromJson(doc);
-  // final Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+
+ final Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+ final veiculoJson = {
+  "nome": data['nome'],
+  "preco": data['preco'],
+  "uid": doc.id,
+ };
   
  
-    veiculos.add(veiculo);
+    veiculos.add(veiculoJson);
   }
 
   return veiculos;
@@ -30,8 +35,6 @@ Future<void> atualizaVeiculo(String uid, String novoNome, String novoPreco) asyn
 
 }
 
-Future<void> deletaVeiculo(Veiculo veiculo) async {
-  await db.collection("veiculo").doc(veiculo.id).delete();
+Future<void> deletaVeiculo(String uid) async {
+  await db.collection("veiculo").doc(uid).delete();
 }
-
-

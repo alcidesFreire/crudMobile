@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/services/veiculo_service.dart';
 
 class AddVeiculoPage extends StatefulWidget {
-  const AddVeiculoPage({super.key});
+  const AddVeiculoPage({super.key,});
 
   @override
   State<AddVeiculoPage> createState() => _AddVeiculoPageState();
@@ -11,11 +11,12 @@ class AddVeiculoPage extends StatefulWidget {
 class _AddVeiculoPageState extends State<AddVeiculoPage> {
   TextEditingController nomeController = TextEditingController();
   TextEditingController precoController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('add veiculo'),
+        title: const Text('Add Veiculo'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(15.0),
@@ -35,14 +36,16 @@ class _AddVeiculoPageState extends State<AddVeiculoPage> {
               ),
             ),
             const SizedBox(height: 20),
-            ElevatedButton(onPressed: ()async {
-              await addVeiculo(nomeController.text, precoController.text).then((_){
-                Navigator.pop(context);
-              });
-              
-              }, 
-          
-              child: const Text('salvar'))
+            ElevatedButton(
+              onPressed: () async {
+               
+                await addVeiculo(nomeController.text, precoController.text)
+                    .then((_) {
+                  Navigator.pop(context);
+                });
+              },
+              child: const Text('Salvar'),
+            )
           ],
         ),
       ),
