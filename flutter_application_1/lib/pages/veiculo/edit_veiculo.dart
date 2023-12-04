@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/services/veiculo_service.dart';
+import 'package:flutter_application_1/services/veiculo/veiculo_service.dart';
 
 class EditVeiculoPage extends StatefulWidget {
   const EditVeiculoPage({super.key});
